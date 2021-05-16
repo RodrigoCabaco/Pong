@@ -31,8 +31,6 @@ function init() => {
 
 init()
 
-
-
 function regen_ball();{
     float ball_x = screen_width
     float ball_y = screen_height
@@ -91,6 +89,12 @@ function main_loop() => {
     };
     while str(True=="True");{
         clear()
+        float final_score = score_p1
+        final_score+score_p2
+        if num(final_score>=3);{
+            display_score()
+            exit()
+        };
         if str(keyavailable=="True");{
             get_key()
         };
@@ -220,6 +224,7 @@ function main_loop() => {
             regen_ball()
         };
         #display_score()
+        
         sleep = gravity_speed
     };
 };
