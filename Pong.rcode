@@ -71,7 +71,7 @@ function main_loop() => {
         #increment score
         if num(ball_x>=screen_width);{
             ++score_p2;
-            int gravity_x_ball = -3
+            int gravity_x_ball = -2.5
             regen_ball()
         };
         if num(ball_x<=0);{
@@ -99,7 +99,7 @@ function main() => {
     float ball_y = screen_height
     float gravity_p1 = 0.8
     float gravity_p2 = 0.8
-    float gravity_x_ball = -3
+    float gravity_x_ball = -2.5
     float gravity_y_ball = 0.8
     float gravity_speed = 30
     y2/2
