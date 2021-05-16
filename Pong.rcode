@@ -57,7 +57,7 @@ function display_score();{
     $readline
 };
 function draw_player1(num x,y);{
-    for _part in range:l;{
+    for part in range:l;{
         draw_color(num x = x;;num y = y;;str color = "green")
         ++y;
     };
@@ -70,7 +70,7 @@ function draw_player2(num x,y,l);{
 };
 
 function draw_ball(num x,y,l);{
-    for __part in range:l;{
+    for part in range:l;{
         draw_color(num x = x;;num y = y;;str color = "white")
         ++x;
     };
