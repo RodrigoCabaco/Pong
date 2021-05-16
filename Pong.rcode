@@ -201,7 +201,7 @@ function main() => {
     #Ball Length
     int blength = 1
     int max_y = screen_height
-    int min_y = 0
+    int min_y = 1
     int offset = 3
     int score_p1 = 0
     int score_p2 = 0
