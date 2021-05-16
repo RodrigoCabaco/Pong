@@ -1,0 +1,47 @@
+include "headers.h.rcode"
+useful_defines()
+
+function draw_player1(num x,y);{
+    draw_color(num x = x;;num y = y;;str color = "white")
+    ++x;
+    draw_color(num x = x;;num y = y;;str color = "white")
+    --x;
+};
+
+function main_loop() => {
+    function get_key();{
+        str keypressed = $readkey
+        if str(keypressed=="Spacebar");{
+            gravity_p1*-1
+        };
+        if str(keypressed=="Enter");{
+            gravity_p2*-1
+        };
+    };
+    while str(True=="True");{
+        if str(keyavailable=="True");{
+            get_key()
+        };
+        clear()
+        draw_player1(num x = x1;;num y = y1)
+        y1+gravity_p1
+        sleep = gravity_speed
+    };
+};
+
+function main() => {
+    float x1 = 3
+    #float x2 = screen_width
+    #x2-10
+    float y1 = 20
+    #float y2 = sceen_height
+    #y1/2
+    #y2/2
+    float gravity_p1 = 1.5
+    float gravity_p2
+    float gravity_speed = 50
+    main_loop()
+};
+
+main()
+exit()
