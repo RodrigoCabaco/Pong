@@ -46,7 +46,6 @@ function main_loop() => {
         };
     };
     while str(True=="True");{
-        
         if str(keyavailable=="True");{
             get_key()
         };
@@ -67,7 +66,9 @@ function main_loop() => {
             float gravity_x_ball = 1
             gravity_y_ball*-1
         };
-        if num(ball_x<=x1);{
+        float YY_2 = x1
+        YY_2+2
+        if num(ball_x<=YY_2);{
             int f = y1
             num to_convert >>f
             numToStr(to_convert)
@@ -91,9 +92,34 @@ function main_loop() => {
             --f;
         };
         function on_collision_p2();{
-            #if it hits p2
-            # float gravity_x_ball = -1
-            # gravity_y_ball*-1
+            #if it hits p1
+            float gravity_x_ball = -1
+            gravity_y_ball*-1
+        };
+        float YY_2 = x2
+        YY_2-2
+        if num(ball_x>=YY_2);{
+            int f = y2
+            num to_convert >>f
+            numToStr(to_convert)
+            str parsed >>""
+            getSplit from:to_convert; to:parsed; index:0; separator:".";
+            strToNum(parsed)
+            num f >>parsed
+            num to_convert >>ball_y
+            numToStr(to_convert)
+            str parsed >>""
+            getSplit from:to_convert; to:parsed; index:0; separator:".";
+            strToNum(parsed)
+            num ball_y >>parsed
+            if num(ball_y==f);{
+                on_collision_p2()
+            };
+            ++f;
+            if num(ball_y==f);{
+                on_collision_p2()
+            };
+            --f;
         };
 
         #ball_y+gravity_y_ball
@@ -120,11 +146,26 @@ function main_loop() => {
         if num(ball_x>=screen_width);{
             ++score_p2;
             float gravity_x_ball = -1
+            float x1 = offset
+            float x2 = screen_width
+            float y1 = screen_height
+            float y2 = screen_height
+            y2/2
+            y1/2
+            x2-offset
             regen_ball()
         };
         if num(ball_x<=0);{
             ++score_p1;
             float gravity_x_ball = 1
+            float gravity_x_ball = -1
+            float x1 = offset
+            float x2 = screen_width
+            float y1 = screen_height
+            float y2 = screen_height
+            y2/2
+            y1/2
+            x2-offset
             regen_ball()
         };
         sleep = gravity_speed
@@ -148,8 +189,8 @@ function main() => {
     float gravity_p1 = 0.8
     float gravity_p2 = 0.8
     float gravity_x_ball = 1
-    float gravity_y_ball = 0.1
-    float gravity_speed = 30
+    float gravity_y_ball = 0.5
+    float gravity_speed = 50
     y2/2
     y1/2
     x2-offset
