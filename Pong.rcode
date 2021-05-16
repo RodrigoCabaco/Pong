@@ -1,6 +1,36 @@
-include "headers.h.rcode"
+import pixel
 import split
-useful_defines()
+
+function init() => {
+    define "slval(":"getStrListValue("
+    define "nlval(":"getNumListValue("
+    define "uslval(":"updateStrListValue("
+    define "unlval(":"updateNumListValue("
+    define " = ":" >>"
+    define "float ":"num "
+    define "float(":"num("
+    define "int":"num"
+    define "string ":"str "
+    define "string(":"str("
+    define "func ":"function "
+    define " readline()":"$readline"
+    define " readkey()":"$readkey"
+    str True = "True"
+    function clear() {
+        clear
+    };
+    function draw_char(num x, num y, str char, str color);{
+        suppress_errors()
+        pixel.drawchar x:x; y:y; color:$color$; char:$char$
+    };
+    function draw_color(num x, num y, str color);{
+        suppress_errors()
+        pixel.draw x:x; y:y; color:$color$;
+    };
+};
+
+init()
+
 
 
 function regen_ball();{
