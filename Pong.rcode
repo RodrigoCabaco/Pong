@@ -1,12 +1,38 @@
 include "headers.h.rcode"
 useful_defines()
 
-function draw_player1(num x,y);{
-    draw_color(num x = x;;num y = y;;str color = "white")
-    ++x;
-    draw_color(num x = x;;num y = y;;str color = "white")
-    --x;
+
+function regen_ball();{
+    float ball_x = screen_width
+    float ball_y = screen_height
+    ball_x/2
+    ball_y/2
+    ball_x-2
 };
+
+function display_score();{
+    #Score
+};
+function draw_player1(num x,y);{
+    for _part in range:l;{
+        draw_color(num x = x;;num y = y;;str color = "green")
+        ++y;
+    };
+};
+function draw_player2(num x,y,l);{
+    for part in range:l;{
+        draw_color(num x = x;;num y = y;;str color = "red")
+        ++y;
+    };
+};
+
+function draw_ball(num x,y,l);{
+    for __part in range:l;{
+        draw_color(num x = x;;num y = y;;str color = "white")
+        ++x;
+    };
+};
+
 
 function main_loop() => {
     function get_key();{
@@ -23,23 +49,66 @@ function main_loop() => {
             get_key()
         };
         clear()
-        draw_player1(num x = x1;;num y = y1)
+        draw_player1(num x = x1;;num y = y1;;num l = plength)
+        draw_player2(num x = x2;;num y = y2;;num l = plength)
+        draw_ball(num x = ball_x;;num y = ball_y;;num l = plength)
         y1+gravity_p1
+        y2+gravity_p2
+        ball_x+gravity_y_ball
+        ball_x+gravity_x_ball
+        if num(y2>=max_y);{
+            gravity_p2*-1
+        };
+        if num(y1>=max_y);{
+            gravity_p1*-1
+        };
+        if num(y1<=min_y);{
+            gravity_p1*-1
+        };
+        if num(y2<=min_y);{
+            gravity_p2*-1
+        };
+        #increment score
+        if num(ball_x>=screen_width);{
+            ++score_p2;
+            int gravity_x_ball = -3
+            regen_ball()
+        };
+        if num(ball_x<=0);{
+            ++score_p1;
+            int gravity_x_ball = 1
+            regen_ball()
+        };
         sleep = gravity_speed
     };
 };
 
 function main() => {
-    float x1 = 3
-    #float x2 = screen_width
-    #x2-10
-    float y1 = 20
-    #float y2 = sceen_height
-    #y1/2
-    #y2/2
-    float gravity_p1 = 1.5
-    float gravity_p2
-    float gravity_speed = 50
+    #Initialize
+    int plength = 2
+    int max_y = screen_height
+    int min_y = 5
+    int offset = 3
+    int score_p1 = 0
+    int score_p2 = 0
+    float x1 = offset
+    float x2 = screen_width
+    float y1 = screen_height
+    float y2 = screen_height
+    float ball_x = screen_width
+    float ball_y = screen_height
+    float gravity_p1 = 0.8
+    float gravity_p2 = 0.8
+    float gravity_x_ball = -3
+    float gravity_y_ball = 0.8
+    float gravity_speed = 30
+    y2/2
+    y1/2
+    x2-offset
+    max_y-min_y
+    ball_x/2
+    ball_y/2
+    ball_x-2
     main_loop()
 };
 
