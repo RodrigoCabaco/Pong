@@ -60,13 +60,14 @@ function main_loop() => {
         };
     };
     while str(True=="True");{
+        clear()
         if str(keyavailable=="True");{
             get_key()
         };
-        clear()
+        
         draw_player1(num x = x1;;num y = y1;;num l = plength)
         draw_player2(num x = x2;;num y = y2;;num l = plength)
-        draw_ball(num x = ball_x;;num y = ball_y;;num l = plength)
+        draw_ball(num x = ball_x;;num y = ball_y;;num l = blength)
         y1+gravity_p1
         y2+gravity_p2
         if num(ball_y>=max_y);{
@@ -77,7 +78,7 @@ function main_loop() => {
         };
         function on_collision_p1();{
             #if it hits p1
-            float gravity_x_ball = 1
+            float gravity_x_ball = init_gravity_x_ball
             gravity_y_ball*-1
         };
         float YY_2 = x1
@@ -107,7 +108,7 @@ function main_loop() => {
         };
         function on_collision_p2();{
             #if it hits p1
-            float gravity_x_ball = -1
+            float gravity_x_ball = init_x_negative
             gravity_y_ball*-1
         };
         float YY_2 = x2
@@ -141,15 +142,19 @@ function main_loop() => {
         ball_y+gravity_y_ball
         if num(y2>=max_y);{
             gravity_p2*-1
+            y2-offset
         };
         if num(y1>=max_y);{
             gravity_p1*-1
+            y1-offset
         };
         if num(y1<=min_y);{
             gravity_p1*-1
+            y1+offset
         };
         if num(y2<=min_y);{
             gravity_p2*-1
+            y2+offset
         };
        
         
@@ -160,7 +165,7 @@ function main_loop() => {
         if num(ball_x>=screen_width);{
             ++score_p2;
             display_score()
-            float gravity_x_ball = -1
+            float gravity_x_ball = init_x_negative
             float x1 = offset
             float x2 = screen_width
             float y1 = screen_height
@@ -173,8 +178,8 @@ function main_loop() => {
         if num(ball_x<=0);{
             ++score_p1;
             display_score()
-            float gravity_x_ball = 1
-            float gravity_x_ball = -1
+            float gravity_x_ball = init_gravity_x_ball
+            float gravity_x_ball = init_x_negative
             float x1 = offset
             float x2 = screen_width
             float y1 = screen_height
@@ -191,9 +196,12 @@ function main_loop() => {
 
 function main() => {
     #Initialize
+    #Player Length
     int plength = 2
+    #Ball Length
+    int blength = 1
     int max_y = screen_height
-    int min_y = 5
+    int min_y = 0
     int offset = 3
     int score_p1 = 0
     int score_p2 = 0
@@ -203,11 +211,14 @@ function main() => {
     float y2 = screen_height
     float ball_x = screen_width
     float ball_y = screen_height
+    #Players y gravity speed
     float gravity_p1 = 0.8
     float gravity_p2 = 0.8
     float gravity_x_ball = 1
-    float gravity_y_ball = 0.5
-    float gravity_speed = 50
+    float init_gravity_x_ball = gravity_x_ball
+    float init_x_negative = gravity_x_ball
+    float gravity_y_ball = 0.8
+    float gravity_speed = 10
     y2/2
     y1/2
     x2-offset
@@ -215,6 +226,7 @@ function main() => {
     ball_x/2
     ball_y/2
     ball_x-2
+    init_x_negative*-1
     main_loop()
 };
 
