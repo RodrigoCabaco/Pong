@@ -12,7 +12,21 @@ function regen_ball();{
 };
 
 function display_score();{
-    #Score
+    int g = screen_width
+    g/2
+    g-12
+    for k in range:g;{
+        Write " "
+    };
+    Write "Score: $score_p2$ - $score_p1$ "
+    newln
+    g+12
+    g-20
+    for k in range:g;{
+        Write " "
+    };
+    Write "Press enter to continue playing..."
+    $readline
 };
 function draw_player1(num x,y);{
     for _part in range:l;{
@@ -100,9 +114,9 @@ function main_loop() => {
         YY_2-2
         if num(ball_x>=YY_2);{
             int f = y2
-            num to_convert >>f
+            num to_convert = f
             numToStr(to_convert)
-            str parsed >>""
+            str parsed = ""
             getSplit from:to_convert; to:parsed; index:0; separator:".";
             strToNum(parsed)
             num f >>parsed
@@ -145,6 +159,7 @@ function main_loop() => {
         #increment score
         if num(ball_x>=screen_width);{
             ++score_p2;
+            display_score()
             float gravity_x_ball = -1
             float x1 = offset
             float x2 = screen_width
@@ -157,6 +172,7 @@ function main_loop() => {
         };
         if num(ball_x<=0);{
             ++score_p1;
+            display_score()
             float gravity_x_ball = 1
             float gravity_x_ball = -1
             float x1 = offset
@@ -168,6 +184,7 @@ function main_loop() => {
             x2-offset
             regen_ball()
         };
+        #display_score()
         sleep = gravity_speed
     };
 };
